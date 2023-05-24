@@ -15,8 +15,10 @@ class Employee(db.Model):
     def __init__(self, name, position):
         self.name = name
         self.position = position
-        
-db.create_all()
+
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/add_employee', methods=['POST'])
 def add_employee():
