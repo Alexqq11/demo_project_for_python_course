@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@0.0.0.0:5432' #80.249.146.63:5432'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@45.131.40.79:5432/employeesit' #80.249.146.63:5432'
 db = SQLAlchemy(app)
 
 
