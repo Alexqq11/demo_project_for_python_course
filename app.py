@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@45.131.40.79:5432/employeesit' #80.249.146.63:5432'
+app.config[
+    'SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@45.131.40.79:5432/employees'  # 80.249.146.63:5432'
 db = SQLAlchemy(app)
 
 
@@ -85,4 +86,4 @@ def delete_employee(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
