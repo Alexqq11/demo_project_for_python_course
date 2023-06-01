@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 app = Flask(__name__)
 app.config[
-    'SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@45.131.40.79:5432/employees'  # 80.249.146.63:5432'
+    'SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@80.249.146.63:5432'  # 45.131.40.79:5432/employees'80.249.146.63:5432
 db = SQLAlchemy(app)
 
 
@@ -21,7 +21,6 @@ class Employee(db.Model):
 with app.app_context():
     db.create_all()
 
-
 @app.route('/employees')
 def get_employees():
     try:
@@ -29,16 +28,15 @@ def get_employees():
         result = []
         for employee in employees:
             data = {
-                'id': employee.id,
-                'name': employee.name,
-                'position': employee.position
-            }
+                        'id': employee.id,
+                        'name': employee.name,
+                    '   position': employee.position
+                    }
             result.append(data)
         return jsonify(result)
     except SQLAlchemyError as e:
-        error = str(e.dict.get('orig', e))
+        error = str(__dict__.get('orig', e))
         return jsonify({'error': error}), 500
-
 
 @app.route('/add_employee', methods=['POST'])
 def add_employee():
@@ -50,9 +48,25 @@ def add_employee():
         db.session.commit()
         return jsonify({'message': 'Employee added successfully'})
     except SQLAlchemyError as e:
-        error = str(e.dict.get('orig', e))
+        error = str(e)
         return jsonify({'error': error}), 500
 
+
+@app.route('/get_employee/<int:id>')
+def get_employee(id):
+    try:
+        employee = Employee.query.get(id)
+        if employee:
+            return jsonify({
+                'id': employee.id,
+                'name': employee.name,
+                'position': employee.position
+            })
+        else:
+            return {'error': 'Employee not found'}
+    except SQLAlchemyError as e:
+        error = str(e)
+        return jsonify({'error': error}), 500
 
 @app.route('/update_employee/<int:id>', methods=['PUT'])
 def update_employee(id):
@@ -67,7 +81,7 @@ def update_employee(id):
         db.session.commit()
         return jsonify({'message': 'Employee updated successfully'})
     except SQLAlchemyError as e:
-        error = str(e.dict.get('orig', e))
+        error = str(e)
         return jsonify({'error': error}), 500
 
 
@@ -81,7 +95,7 @@ def delete_employee(id):
         db.session.commit()
         return jsonify({'message': 'Employee deleted successfully'})
     except SQLAlchemyError as e:
-        error = str(e.dict.get('orig', e))
+        error = str(e)
         return jsonify({'error': error}), 500
 
 
