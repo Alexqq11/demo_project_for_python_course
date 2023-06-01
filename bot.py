@@ -1,14 +1,18 @@
 import logging
+import os
 import requests
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters
 
-TELEGRAM_TOKEN = "6057583176:AAE1tbvoX0ID5_1R8SMZT9dafwzpqZ9tXUY"
-API_URL = "http://45.131.40.79:5000"
 
-#logging.basicConfig(
-#    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-#    level=logging.INFO
-#)
+
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+API_URL = os.getenv('API_URL')
+
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 
 
 def get_employees():

@@ -10,6 +10,14 @@ services:
       - .:/app
     depends_on:
       - db
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    env_file: .env
+    depends_on:
+      - web
+      - db
   db:
     image: "docker.io/library/postgres:13.1-alpine"
     environment:
