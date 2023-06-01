@@ -15,7 +15,7 @@ services:
     environment:
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
-      POSTGRES_DB: ${PG_Db}
+      POSTGRES_DB: ${PG_DB}
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
