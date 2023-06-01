@@ -32,7 +32,7 @@ def get_employees():
             data = {
                         'id': employee.id,
                         'name': employee.name,
-                    '   position': employee.position
+                        'position': employee.position
                     }
             result.append(data)
         return jsonify(result)
