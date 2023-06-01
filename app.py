@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
+import os
 
 app = Flask(__name__)
 app.config[
-    'SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@45.131.40.79:5432/employees'#80.249.146.63:5432
+    'SQLALCHEMY_DATABASE_URI'] =f"postgresql://{os.environ['PG_USER']}:{os.environ['PG_PASSWORD']}@{os.environ['PG_HOST']}:5432/{os.environ['PG_DB']}"
+#'postgresql://myuser:mypassword@45.131.40.79:5432/employees'#80.249.146.63:5432
 db = SQLAlchemy(app)
 
 
